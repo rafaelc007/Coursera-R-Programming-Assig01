@@ -29,11 +29,15 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   
   ## setting work directory
   setwd("~/Documentos/R_studio_WD/Quiz02_data")
-  calc_mean <- 0
+  sum_mean <- 0
+  size <- 0
   for (fileID in id){
     file_name <- convert_name(fileID)
     data <- read.csv(paste(directory,'/',file_name,'.csv', sep = ""))
-    calc_mean <- calc_mean+mean(data[pollutant][!is.na(data[pollutant])])
+    data <- data[pollutant][!is.na(data[pollutant])]
+    sum_mean <- sum_mean+sum(data)
+    size <- size+length(data)
   }
+  calc_mean <- sum_mean/size
   calc_mean
 }
